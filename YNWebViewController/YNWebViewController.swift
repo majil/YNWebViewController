@@ -10,9 +10,9 @@ import UIKit
 
 public class YNWebViewController: UIViewController, UIWebViewDelegate {
 
-    var request: URLRequest
-    var webView = UIWebView()
-    var delegate: UIWebViewDelegate?
+    public var request: URLRequest
+    public var webView = UIWebView()
+    public var delegate: UIWebViewDelegate?
 
     fileprivate lazy var backBarButtonItem: UIBarButtonItem = {
         let item = UIBarButtonItem(image: UIImage(named: "YNWebViewControllerBack.png"), style: .plain, target: self, action: #selector(YNWebViewController.goBackTapped(_:)))
