@@ -14,29 +14,29 @@ class YNWebViewController: UIViewController, UIWebViewDelegate {
     var webView = UIWebView()
     var delegate: UIWebViewDelegate?
 
-    fileprivate lazy var backBarButtonItem: UIBarButtonItem = {
+    lazy var backBarButtonItem: UIBarButtonItem = {
         let item = UIBarButtonItem(image: UIImage(named: "YNWebViewControllerBack.png"), style: .plain, target: self, action: #selector(YNWebViewController.goBackTapped(_:)))
         item.width = 18
         return item
     }()
     
-    fileprivate lazy var forwardBarButtonItem: UIBarButtonItem = {
+    lazy var forwardBarButtonItem: UIBarButtonItem = {
         let item = UIBarButtonItem(image: UIImage(named: "YNWebViewControllerNext.png"), style: .plain, target: self, action: #selector(YNWebViewController.goForwardTapped(_:)))
         item.width = 18
         return item
     }()
     
-    fileprivate lazy var refreshBarButtonItem: UIBarButtonItem = {
+    lazy var refreshBarButtonItem: UIBarButtonItem = {
         let item = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(YNWebViewController.reloadTapped(_:)))
         return item
     }()
     
-    fileprivate lazy var stopBarButtonItem: UIBarButtonItem = {
+    lazy var stopBarButtonItem: UIBarButtonItem = {
         let item = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(YNWebViewController.stopTapped(_:)))
         return item
     }()
     
-    fileprivate lazy var actionBarButtonItem: UIBarButtonItem = {
+    lazy var actionBarButtonItem: UIBarButtonItem = {
         let item = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(YNWebViewController.actionButtonTapped(_:)))
         return item
     }()
