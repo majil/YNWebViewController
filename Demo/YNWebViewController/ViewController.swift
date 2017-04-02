@@ -16,7 +16,7 @@ class ViewController: UIViewController, UIWebViewDelegate {
     }
 
     @IBAction func presentController(_ sender: AnyObject) {
-        let webViewController = YNWebViewController(url: URL(string: "https://www.apple.com")!)
+        let webViewController = YNWebViewController(url: URL(string: "https://www.baidu.com")!)
         webViewController.delegate = self
         let navController = UINavigationController(rootViewController: webViewController)
         self.present(navController, animated: true, completion: nil)

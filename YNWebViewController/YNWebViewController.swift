@@ -8,35 +8,35 @@
 
 import UIKit
 
-class YNWebViewController: UIViewController, UIWebViewDelegate {
+public class YNWebViewController: UIViewController, UIWebViewDelegate {
 
     var request: URLRequest
     var webView = UIWebView()
     var delegate: UIWebViewDelegate?
 
-    lazy var backBarButtonItem: UIBarButtonItem = {
+    fileprivate lazy var backBarButtonItem: UIBarButtonItem = {
         let item = UIBarButtonItem(image: UIImage(named: "YNWebViewControllerBack.png"), style: .plain, target: self, action: #selector(YNWebViewController.goBackTapped(_:)))
         item.width = 18
         return item
     }()
     
-    lazy var forwardBarButtonItem: UIBarButtonItem = {
+    fileprivate lazy var forwardBarButtonItem: UIBarButtonItem = {
         let item = UIBarButtonItem(image: UIImage(named: "YNWebViewControllerNext.png"), style: .plain, target: self, action: #selector(YNWebViewController.goForwardTapped(_:)))
         item.width = 18
         return item
     }()
     
-    lazy var refreshBarButtonItem: UIBarButtonItem = {
+    fileprivate lazy var refreshBarButtonItem: UIBarButtonItem = {
         let item = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(YNWebViewController.reloadTapped(_:)))
         return item
     }()
     
-    lazy var stopBarButtonItem: UIBarButtonItem = {
+    fileprivate lazy var stopBarButtonItem: UIBarButtonItem = {
         let item = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(YNWebViewController.stopTapped(_:)))
         return item
     }()
     
-    lazy var actionBarButtonItem: UIBarButtonItem = {
+    fileprivate lazy var actionBarButtonItem: UIBarButtonItem = {
         let item = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(YNWebViewController.actionButtonTapped(_:)))
         return item
     }()
@@ -50,11 +50,11 @@ class YNWebViewController: UIViewController, UIWebViewDelegate {
         super.init(nibName: nil, bundle: nil)
     }
 
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.isToolbarHidden = false
         webView.frame = UIScreen.main.bounds
@@ -112,30 +112,30 @@ class YNWebViewController: UIViewController, UIWebViewDelegate {
 
     // MARK: - UIWebViewDelegate
     
-    func webViewDidStartLoad(_ webView: UIWebView) {
+    public func webViewDidStartLoad(_ webView: UIWebView) {
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         self.updateToolbarItems()
         delegate?.webViewDidStartLoad?(webView)
     }
     
-    func webViewDidFinishLoad(_ webView: UIWebView) {
+    public func webViewDidFinishLoad(_ webView: UIWebView) {
         UIApplication.shared.isNetworkActivityIndicatorVisible = false
         self.updateToolbarItems()
         self.navigationItem.title = webView.stringByEvaluatingJavaScript(from: "document.title") ?? "title"
         delegate?.webViewDidFinishLoad?(webView)
     }
     
-    func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
+    public func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
         UIApplication.shared.isNetworkActivityIndicatorVisible = false
         self.updateToolbarItems()
         delegate?.webView?(webView, didFailLoadWithError: error)
     }
     
-    func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+    public func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
         return (delegate?.webView?(webView, shouldStartLoadWith: request, navigationType: navigationType)) ?? true
     }
     
-    override func didReceiveMemoryWarning() {
+    public override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
