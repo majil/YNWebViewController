@@ -104,8 +104,7 @@ Pod::Spec.new do |s|
   #
 
   # s.resource  = "icon.png"
-  s.resources = "YNWebViewController/**/*.{png,jpeg,jpg}"
-
+  s.resources = "YNWebViewController", "YNWebViewController/**/*.{png,jpeg,jpg}"
   # s.preserve_paths = "FilesToSave", "MoreFilesToSave"
 
 
