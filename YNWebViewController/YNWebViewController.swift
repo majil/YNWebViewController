@@ -41,11 +41,11 @@ public class YNWebViewController: UIViewController, UIWebViewDelegate {
         return item
     }()
     
-    convenience init(url: URL) {
+    convenience public init(url: URL) {
         self.init(request: URLRequest(url: url))
     }
     
-    init(request: URLRequest) {
+    public init(request: URLRequest) {
         self.request = request
         super.init(nibName: nil, bundle: nil)
     }
@@ -79,19 +79,19 @@ public class YNWebViewController: UIViewController, UIWebViewDelegate {
         self.navigationController!.toolbar.tintColor = self.navigationController!.navigationBar.tintColor
     }
     
-    func goBackTapped(_ sender: UIBarButtonItem) {
+    public func goBackTapped(_ sender: UIBarButtonItem) {
         self.webView.goBack()
     }
     
-    func goForwardTapped(_ sender: UIBarButtonItem) {
+    public func goForwardTapped(_ sender: UIBarButtonItem) {
         self.webView.goForward()
     }
     
-    func reloadTapped(_ sender: UIBarButtonItem) {
+    public func reloadTapped(_ sender: UIBarButtonItem) {
         self.webView.reload()
     }
     
-    func stopTapped(_ sender: UIBarButtonItem) {
+    public func stopTapped(_ sender: UIBarButtonItem) {
         self.webView.stopLoading()
         self.updateToolbarItems()
     }
