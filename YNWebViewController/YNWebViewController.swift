@@ -15,13 +15,23 @@ public class YNWebViewController: UIViewController, UIWebViewDelegate {
     public var delegate: UIWebViewDelegate?
 
     public lazy var backBarButtonItem: UIBarButtonItem = {
-        let item = UIBarButtonItem(image: UIImage(named: "YNWebViewControllerBack.png"), style: .plain, target: self, action: #selector(YNWebViewController.goBackTapped(_:)))
+        
+        // for cocoapods
+        let bundle = Bundle(for: YNWebViewController.self)
+        let backImage = UIImage(named: "YNWebViewControllerBack.png", in: bundle, compatibleWith: nil)
+        
+        let item = UIBarButtonItem(image: backImage, style: .plain, target: self, action: #selector(YNWebViewController.goBackTapped(_:)))
         item.width = 18
         return item
     }()
     
     public lazy var forwardBarButtonItem: UIBarButtonItem = {
-        let item = UIBarButtonItem(image: UIImage(named: "YNWebViewControllerNext.png"), style: .plain, target: self, action: #selector(YNWebViewController.goForwardTapped(_:)))
+        
+        // for cocoapods
+        let bundle = Bundle(for: YNWebViewController.self)
+        let nextImage = UIImage(named: "YNWebViewControllerNext.png", in: bundle, compatibleWith: nil)
+        
+        let item = UIBarButtonItem(image: nextImage, style: .plain, target: self, action: #selector(YNWebViewController.goForwardTapped(_:)))
         item.width = 18
         return item
     }()
