@@ -14,13 +14,13 @@ public class YNWebViewController: UIViewController, UIWebViewDelegate {
     public var webView = UIWebView()
     public var delegate: UIWebViewDelegate?
 
-    public lazy var backBarButtonItem: UIBarButtonItem = {
+    public var backBarButtonItem: UIBarButtonItem = {
         let item = UIBarButtonItem(image: UIImage(named: "YNWebViewControllerBack.png"), style: .plain, target: self, action: #selector(YNWebViewController.goBackTapped(_:)))
         item.width = 18
         return item
     }()
     
-    public lazy var forwardBarButtonItem: UIBarButtonItem = {
+    public var forwardBarButtonItem: UIBarButtonItem = {
         let item = UIBarButtonItem(image: UIImage(named: "YNWebViewControllerNext.png"), style: .plain, target: self, action: #selector(YNWebViewController.goForwardTapped(_:)))
         item.width = 18
         return item
