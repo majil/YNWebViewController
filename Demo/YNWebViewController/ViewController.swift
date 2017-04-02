@@ -15,11 +15,11 @@ class ViewController: UIViewController, UIWebViewDelegate {
         // Do any additional setup after loading the view, typically from a nib.
     }
 
-    @IBAction func presentController(sender: AnyObject) {
-        let webViewController = YNWebViewController(url: NSURL(string: "https://www.apple.com")!)
+    @IBAction func presentController(_ sender: AnyObject) {
+        let webViewController = YNWebViewController(url: URL(string: "https://www.apple.com")!)
         webViewController.delegate = self
         let navController = UINavigationController(rootViewController: webViewController)
-        self.presentViewController(navController, animated: true, completion: nil)
+        self.present(navController, animated: true, completion: nil)
     }
     
     override func didReceiveMemoryWarning() {

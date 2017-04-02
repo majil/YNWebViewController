@@ -208,13 +208,16 @@
 				TargetAttributes = {
 					6CD2B0FB1C1F6E1700660359 = {
 						CreatedOnToolsVersion = 7.2;
+						LastSwiftMigration = 0820;
 					};
 					6CD2B10F1C1F6E1700660359 = {
 						CreatedOnToolsVersion = 7.2;
+						LastSwiftMigration = 0820;
 						TestTargetID = 6CD2B0FB1C1F6E1700660359;
 					};
 					6CD2B11A1C1F6E1700660359 = {
 						CreatedOnToolsVersion = 7.2;
+						LastSwiftMigration = 0820;
 						TestTargetID = 6CD2B0FB1C1F6E1700660359;
 					};
 				};
@@ -420,6 +423,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.xuyunan.YNWebViewController;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -432,6 +436,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.xuyunan.YNWebViewController;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -443,6 +448,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.xuyunan.YNWebViewControllerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/YNWebViewController.app/YNWebViewController";
 			};
 			name = Debug;
@@ -455,6 +461,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.xuyunan.YNWebViewControllerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/YNWebViewController.app/YNWebViewController";
 			};
 			name = Release;
@@ -466,6 +473,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.xuyunan.YNWebViewControllerUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = YNWebViewController;
 				USES_XCTRUNNER = YES;
 			};
@@ -478,6 +486,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.xuyunan.YNWebViewControllerUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = YNWebViewController;
 				USES_XCTRUNNER = YES;
 			};

@@ -10,17 +10,17 @@ import UIKit
 
 class YNActivity: UIActivity {
     
-    var URLToOpen: NSURL?
+    var URLToOpen: URL?
     var schemePrefix: String?
     
-    override func activityType() -> String? {
-        return NSStringFromClass(self.classForCoder)
+    override var activityType: UIActivityType? {
+        return UIActivityType(rawValue: NSStringFromClass(self.classForCoder))
     }
-    
-    override func prepareWithActivityItems(activityItems: [AnyObject]) {
+
+    override func prepare(withActivityItems activityItems: [Any]) {
         for activityItem in activityItems {
-            if activityItem.isKindOfClass(NSURL.classForCoder()) {
-                self.URLToOpen = activityItem as? NSURL
+            if activityItem is URL {
+                self.URLToOpen = activityItem as? URL
             }
         }
     }
@@ -29,25 +29,25 @@ class YNActivity: UIActivity {
 
 class YNWebViewControllerActivitySafari: YNActivity {
     
-    override func activityTitle() -> String? {
+    override var activityTitle : String? {
         return "Open in Safari"
     }
     
-    override func activityImage() -> UIImage? {
+    override var activityImage : UIImage? {
         return UIImage(named: "YNWebViewControllerActivitySafari.png")
     }
     
-    override func canPerformWithActivityItems(activityItems: [AnyObject]) -> Bool {
+    override func canPerform(withActivityItems activityItems: [Any]) -> Bool {
         for activityItem in activityItems {
-            if activityItem.isKindOfClass(NSURL.classForCoder()) && UIApplication.sharedApplication().canOpenURL(activityItem as! NSURL)  {
+            if activityItem is URL && UIApplication.shared.canOpenURL(activityItem as! URL)  {
                 return true
             }
         }
         return false
     }
     
-    override func performActivity() {
-        let completed = UIApplication.sharedApplication().openURL(self.URLToOpen!)
+    override func perform() {
+        let completed = UIApplication.shared.openURL(self.URLToOpen!)
         self.activityDidFinish(completed)
     }
 }
@@ -55,24 +55,24 @@ class YNWebViewControllerActivitySafari: YNActivity {
 
 class YNWebViewControllerActivityChrome: YNActivity {
     
-    override func activityTitle() -> String? {
+    override var activityTitle : String? {
         return "Open in Chrome"
     }
     
-    override func activityImage() -> UIImage? {
+    override var activityImage : UIImage? {
         return UIImage(named: "YNWebViewControllerActivityChrome.png")
     }
     
-    override func canPerformWithActivityItems(activityItems: [AnyObject]) -> Bool {
+    override func canPerform(withActivityItems activityItems: [Any]) -> Bool {
         for activityItem in activityItems {
-            if activityItem.isKindOfClass(NSURL.classForCoder()) && UIApplication.sharedApplication().canOpenURL(NSURL(string: "googlechrome://")!)  {
+            if activityItem is URL && UIApplication.shared.canOpenURL(URL(string: "googlechrome://")!)  {
                 return true
             }
         }
         return false
     }
     
-    override func performActivity() {
+    override func perform() {
         let inputURL = self.URLToOpen
         let scheme = inputURL?.scheme
         
@@ -86,11 +86,11 @@ class YNWebViewControllerActivityChrome: YNActivity {
    
         if let s = chromeScheme {
             let absoluteString = inputURL?.absoluteString
-            let rangeForScheme = absoluteString?.rangeOfString(":")
-            let urlNoScheme = absoluteString?.substringFromIndex((rangeForScheme?.startIndex)!)
-            let chromeURLString = s.stringByAppendingString(urlNoScheme!)
-            let chromeURL = NSURL(string: chromeURLString)
-            UIApplication.sharedApplication().openURL(chromeURL!)
+            let rangeForScheme = absoluteString?.range(of: ":")
+            let urlNoScheme = absoluteString?.substring(from: (rangeForScheme?.lowerBound)!)
+            let chromeURLString = s + urlNoScheme!
+            let chromeURL = URL(string: chromeURLString)
+            UIApplication.shared.openURL(chromeURL!)
         }
     }
 }

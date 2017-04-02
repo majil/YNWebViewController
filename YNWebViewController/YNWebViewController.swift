@@ -10,42 +10,42 @@ import UIKit
 
 class YNWebViewController: UIViewController, UIWebViewDelegate {
 
-    var request: NSURLRequest
+    var request: URLRequest
     var webView = UIWebView()
     var delegate: UIWebViewDelegate?
 
-    private lazy var backBarButtonItem: UIBarButtonItem = {
-        let item = UIBarButtonItem(image: UIImage(named: "YNWebViewControllerBack.png"), style: .Plain, target: self, action: Selector("goBackTapped:"))
+    fileprivate lazy var backBarButtonItem: UIBarButtonItem = {
+        let item = UIBarButtonItem(image: UIImage(named: "YNWebViewControllerBack.png"), style: .plain, target: self, action: #selector(YNWebViewController.goBackTapped(_:)))
         item.width = 18
         return item
     }()
     
-    private lazy var forwardBarButtonItem: UIBarButtonItem = {
-        let item = UIBarButtonItem(image: UIImage(named: "YNWebViewControllerNext.png"), style: .Plain, target: self, action: Selector("goForwardTapped:"))
+    fileprivate lazy var forwardBarButtonItem: UIBarButtonItem = {
+        let item = UIBarButtonItem(image: UIImage(named: "YNWebViewControllerNext.png"), style: .plain, target: self, action: #selector(YNWebViewController.goForwardTapped(_:)))
         item.width = 18
         return item
     }()
     
-    private lazy var refreshBarButtonItem: UIBarButtonItem = {
-        let item = UIBarButtonItem(barButtonSystemItem: .Refresh, target: self, action: Selector("reloadTapped:"))
+    fileprivate lazy var refreshBarButtonItem: UIBarButtonItem = {
+        let item = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(YNWebViewController.reloadTapped(_:)))
         return item
     }()
     
-    private lazy var stopBarButtonItem: UIBarButtonItem = {
-        let item = UIBarButtonItem(barButtonSystemItem: .Stop, target: self, action: Selector("stopTapped:"))
+    fileprivate lazy var stopBarButtonItem: UIBarButtonItem = {
+        let item = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(YNWebViewController.stopTapped(_:)))
         return item
     }()
     
-    private lazy var actionBarButtonItem: UIBarButtonItem = {
-        let item = UIBarButtonItem(barButtonSystemItem: .Action, target: self, action: Selector("actionButtonTapped:"))
+    fileprivate lazy var actionBarButtonItem: UIBarButtonItem = {
+        let item = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(YNWebViewController.actionButtonTapped(_:)))
         return item
     }()
     
-    convenience init(url: NSURL) {
-        self.init(request: NSURLRequest(URL: url))
+    convenience init(url: URL) {
+        self.init(request: URLRequest(url: url))
     }
     
-    init(request: NSURLRequest) {
+    init(request: URLRequest) {
         self.request = request
         super.init(nibName: nil, bundle: nil)
     }
@@ -56,8 +56,8 @@ class YNWebViewController: UIViewController, UIWebViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.toolbarHidden = false
-        webView.frame = UIScreen.mainScreen().bounds
+        self.navigationController?.isToolbarHidden = false
+        webView.frame = UIScreen.main.bounds
         webView.scalesPageToFit = true
         webView.loadRequest(request)
         webView.delegate = self
@@ -65,12 +65,12 @@ class YNWebViewController: UIViewController, UIWebViewDelegate {
     }
 
     func updateToolbarItems() {
-        self.backBarButtonItem.enabled = self.webView.canGoBack
-        self.forwardBarButtonItem.enabled = self.webView.canGoForward
+        self.backBarButtonItem.isEnabled = self.webView.canGoBack
+        self.forwardBarButtonItem.isEnabled = self.webView.canGoForward
         
-        let refreshStopBarButtonItem = self.webView.loading ? self.stopBarButtonItem : self.refreshBarButtonItem;
-        let fixedSpace = UIBarButtonItem(barButtonSystemItem: .FixedSpace, target: nil, action: nil)
-        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil)
+        let refreshStopBarButtonItem = self.webView.isLoading ? self.stopBarButtonItem : self.refreshBarButtonItem;
+        let fixedSpace = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         
         let items = [fixedSpace, self.backBarButtonItem, flexibleSpace, self.forwardBarButtonItem, flexibleSpace, refreshStopBarButtonItem, flexibleSpace, self.actionBarButtonItem, fixedSpace]
         self.toolbarItems = items
@@ -79,60 +79,60 @@ class YNWebViewController: UIViewController, UIWebViewDelegate {
         self.navigationController!.toolbar.tintColor = self.navigationController!.navigationBar.tintColor
     }
     
-    func goBackTapped(sender: UIBarButtonItem) {
+    func goBackTapped(_ sender: UIBarButtonItem) {
         self.webView.goBack()
     }
     
-    func goForwardTapped(sender: UIBarButtonItem) {
+    func goForwardTapped(_ sender: UIBarButtonItem) {
         self.webView.goForward()
     }
     
-    func reloadTapped(sender: UIBarButtonItem) {
+    func reloadTapped(_ sender: UIBarButtonItem) {
         self.webView.reload()
     }
     
-    func stopTapped(sender: UIBarButtonItem) {
+    func stopTapped(_ sender: UIBarButtonItem) {
         self.webView.stopLoading()
         self.updateToolbarItems()
     }
     
-    func actionButtonTapped(sender: UIBarButtonItem) {
-        let requestURL = self.webView.request!.URL ?? self.request.URL
+    func actionButtonTapped(_ sender: UIBarButtonItem) {
+        let requestURL = self.webView.request!.url ?? self.request.url
         if let url = requestURL {
             let activityItems = [YNWebViewControllerActivitySafari(), YNWebViewControllerActivityChrome()]
             if url.absoluteString.hasPrefix("file:///") {
-                let dc = UIDocumentInteractionController(URL: url)
-                dc.presentOptionsMenuFromRect(self.view.bounds, inView: self.view, animated: true)
+                let dc = UIDocumentInteractionController(url: url)
+                dc.presentOptionsMenu(from: self.view.bounds, in: self.view, animated: true)
             } else {
                 let activityController = UIActivityViewController(activityItems:[url] , applicationActivities: activityItems)
-                self.presentViewController(activityController, animated: true, completion: nil)
+                self.present(activityController, animated: true, completion: nil)
             }
         }
     }
 
     // MARK: - UIWebViewDelegate
     
-    func webViewDidStartLoad(webView: UIWebView) {
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+    func webViewDidStartLoad(_ webView: UIWebView) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         self.updateToolbarItems()
         delegate?.webViewDidStartLoad?(webView)
     }
     
-    func webViewDidFinishLoad(webView: UIWebView) {
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+    func webViewDidFinishLoad(_ webView: UIWebView) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
         self.updateToolbarItems()
-        self.navigationItem.title = webView.stringByEvaluatingJavaScriptFromString("document.title") ?? "title"
+        self.navigationItem.title = webView.stringByEvaluatingJavaScript(from: "document.title") ?? "title"
         delegate?.webViewDidFinishLoad?(webView)
     }
     
-    func webView(webView: UIWebView, didFailLoadWithError error: NSError?) {
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+    func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
         self.updateToolbarItems()
         delegate?.webView?(webView, didFailLoadWithError: error)
     }
     
-    func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
-        return (delegate?.webView?(webView, shouldStartLoadWithRequest: request, navigationType: navigationType)) ?? true
+    func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+        return (delegate?.webView?(webView, shouldStartLoadWith: request, navigationType: navigationType)) ?? true
     }
     
     override func didReceiveMemoryWarning() {
@@ -143,7 +143,7 @@ class YNWebViewController: UIViewController, UIWebViewDelegate {
     deinit {
         self.webView.stopLoading()
         self.webView.delegate = nil
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
     }
     
     /*
