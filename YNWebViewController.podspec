@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "YNWebViewController"
-  s.version      = "0.1.1"
+  s.version      = "0.1.2"
   s.summary      = "WebViewController的扩展控件"
 
   # This description is used to generate tags and improve search results.
@@ -104,10 +104,7 @@ Pod::Spec.new do |s|
   #
 
   # s.resource  = "icon.png"
-  s.resources = "YNWebViewController/images/*.png"
-  s.resource_bundles = {
-    'YNWebViewController' => ['YNWebViewController/images/*.png']
-  }
+  s.resources = "YNWebViewController/images/*"
   # s.preserve_paths = "FilesToSave", "MoreFilesToSave"
 
 
