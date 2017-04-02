@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "YNWebViewController"
-  s.version      = "0.0.2"
+  s.version      = "0.0.3"
   s.summary      = "WebViewController的扩展控件"
 
   # This description is used to generate tags and improve search results.
@@ -89,7 +89,7 @@ Pod::Spec.new do |s|
   #  Not including the public_header_files will make all headers public.
   #
 
-  s.source_files  = "Classes", "YNWebViewController/*"
+  s.source_files  = "YNWebViewController", "YNWebViewController/**/*.{swift}"
   # s.exclude_files = "Classes/Exclude"
 
   # s.public_header_files = "Classes/**/*.h"
@@ -104,7 +104,7 @@ Pod::Spec.new do |s|
   #
 
   # s.resource  = "icon.png"
-  # s.resources = "Resources/*.png"
+  s.resources = "YNWebViewController/**/*.{png,jpeg,jpg}"
 
   # s.preserve_paths = "FilesToSave", "MoreFilesToSave"
 
